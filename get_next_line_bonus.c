@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnolte <pnolte@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 14:00:22 by pnolte            #+#    #+#             */
-/*   Updated: 2022/05/04 16:39:02 by pnolte           ###   ########.fr       */
+/*   Created: 2022/05/09 14:56:58 by pnolte            #+#    #+#             */
+/*   Updated: 2022/05/09 15:31:34 by pnolte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read(char *remember, int fd)
 {
@@ -58,36 +58,48 @@ char	*ft_cut(char *remember)
 
 char	*get_next_line(int fd)
 {
-	static char	*remember;
+	static char	*remember[OPEN_MAX];
 	char		*line;
 	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	remember = ft_read(remember, fd);
-	if (remember == NULL)
+	remember[fd] = ft_read(remember[fd], fd);
+	if (remember[fd] == NULL)
 		return (NULL);
-	line = ft_cut(remember);
+	line = ft_cut(remember[fd]);
 	i = 0;
-	while (remember[i] != '\n' && remember[i] != '\0')
+	while (remember[fd][i] != '\n' && remember[fd][i] != '\0')
 		i++;
-	remember = ft_substr(remember, i + 1, ft_strlen(remember));
+	remember[fd] = ft_substr(remember[fd], i + 1, ft_strlen(remember[fd]));
 	return (line);
 }
-
-// void check_leaks();
 
 // int main(void)
 // {
 // 	int i;
+//     int j;
 // 	char *p;
 
 // 	p = NULL;
+//     j = open("test1.txt", O_RDONLY);
 // 	i = open("multiple_line_no_nl", O_RDONLY);
 // 	p = get_next_line(i);
 // 	printf("Result:%s\n", p);
 // 	free(p);
+//     p = get_next_line(j);
+// 	printf("Result:%s\n", p);
+// 	free(p);
 // 	p = get_next_line(i);
+// 	printf("Result:%s\n", p);
+// 	free(p);
+//     p = get_next_line(j);
+// 	printf("Result:%s\n", p);
+// 	free(p);
+// 	p = get_next_line(i);
+// 	printf("Result:%s\n", p);
+// 	free(p);
+//     p = get_next_line(j);
 // 	printf("Result:%s\n", p);
 // 	free(p);
 // 	p = get_next_line(i);
@@ -99,9 +111,5 @@ char	*get_next_line(int fd)
 // 	p = get_next_line(i);
 // 	printf("Result:%s\n", p);
 // 	free(p);
-// 	p = get_next_line(i);
-// 	printf("Result:%s\n", p);
-// 	free(p);
-// 	check_leaks();
 // 	return (0);
 // }

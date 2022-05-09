@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnolte <pnolte@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 12:41:25 by pnolte            #+#    #+#             */
-/*   Updated: 2022/05/04 16:35:16 by pnolte           ###   ########.fr       */
+/*   Created: 2022/05/09 14:56:52 by pnolte            #+#    #+#             */
+/*   Updated: 2022/05/09 15:36:47 by pnolte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef  BUFFER_SIZE
 #  define BUFFER_SIZE = 100
 # endif
+# include <limits.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
